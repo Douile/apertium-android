@@ -1,0 +1,17 @@
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Build Android project"
+        uses: vgaidarji/android-github-actions-build@v1.0.1
+        with:
+          args: "./gradlew assembleDebug"
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-build
+          path: "**/*.apk"
